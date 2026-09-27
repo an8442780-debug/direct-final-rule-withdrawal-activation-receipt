@@ -1,6 +1,7 @@
 import hashlib
 import os
 import tempfile
+from pathlib import Path
 
 from gltest.direct import loader as direct_loader
 from gltest.direct.sdk_compat import import_address, import_calldata
@@ -75,7 +76,11 @@ direct_loader._inject_message_to_fd0 = _inject_message_to_fd0_without_windows_un
 VMContext._cleanup_after_deactivate = _cleanup_after_deactivate_with_message_file
 
 
-CONTRACT = "contracts/direct_final_rule_withdrawal_activation_receipt.py"
+CONTRACT = str(
+    Path(__file__).resolve().parents[2]
+    / "contracts"
+    / "direct_final_rule_withdrawal_activation_receipt.py"
+)
 AGENCY = "Food and Drug Administration"
 DOCKET = "FDA-2024-N-3654"
 RIN = "0910-AI97"

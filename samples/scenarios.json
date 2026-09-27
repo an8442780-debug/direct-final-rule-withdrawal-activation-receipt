@@ -1,0 +1,63 @@
+{
+  "project": "Direct Final Rule Withdrawal Activation Receipt",
+  "network": "studio-dev",
+  "chain_id": 61997,
+  "cases": [
+    {
+      "id": "FDA-WITHDRAWAL-OVERRIDES-DATE",
+      "purpose": "A docket-linked withdrawal wins over the corrected scheduled effective date.",
+      "lineage": {
+        "agency": "Food and Drug Administration",
+        "docket": "FDA-2024-N-3654",
+        "rin": "0910-AI97",
+        "originating_fr_doc": "2024-21231",
+        "originating_fr_citation": "89 FR 77019",
+        "expected_effective_day": "2025-02-03"
+      },
+      "sources": [
+        {
+          "kind": "ORIGINATING",
+          "fr_doc": "2024-21231",
+          "url": "https://www.federalregister.gov/d/2024-21231",
+          "effective_day": "2025-02-03",
+          "source_hash": "1c0e160c347ad14ebe779dfdbddd9e5037a884fcb9a94c6cd10b127224aeba8c"
+        },
+        {
+          "kind": "CORRECTION",
+          "fr_doc": "2024-24100",
+          "url": "https://www.federalregister.gov/d/2024-24100",
+          "effective_day": "2025-02-03",
+          "source_hash": "4038e3ab31c5560843f4cddb164cca8e64e8babcf8dac6c129db8f56a43a141a"
+        },
+        {
+          "kind": "WITHDRAWAL",
+          "fr_doc": "2025-01145",
+          "url": "https://www.federalregister.gov/d/2025-01145",
+          "effective_day": "2025-01-17",
+          "source_hash": "65061558079568d017e40b962e0d97efcabcc9ac3e2f4acb70316253c14b042d"
+        }
+      ],
+      "assessment_day": "2025-02-04",
+      "expected_status": "WITHDRAWN",
+      "expected_is_rule_active": false,
+      "deployment": "PENDING_STAGE_6"
+    },
+    {
+      "id": "SYNTHETIC-PENDING-THEN-EFFECTIVE",
+      "purpose": "A sealed source set without withdrawal stays pending before the corrected day and becomes effective after it.",
+      "source_basis": "The same FDA originating and correction documents above, intentionally omitting the terminal withdrawal source.",
+      "source_kinds": ["ORIGINATING", "CORRECTION"],
+      "assessment_days": ["2025-01-01", "2025-02-04"],
+      "expected_statuses": ["PENDING", "EFFECTIVE"],
+      "expected_is_rule_active": [false, true],
+      "deployment": "PENDING_STAGE_6"
+    },
+    {
+      "id": "CROSS_DOCKET-FAIL_CLOSED",
+      "purpose": "A source that does not repeat the sealed docket cannot activate the rule.",
+      "expected_status": "UNRESOLVED",
+      "expected_is_rule_active": false,
+      "deployment": "PENDING_STAGE_6"
+    }
+  ]
+}
